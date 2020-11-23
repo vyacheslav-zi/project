@@ -1,9 +1,13 @@
 "use strict";
 
+
 let numberOfFilms = '';
-    while(numberOfFilms == null || numberOfFilms == '' || numberOfFilms.length > 50){
+
+function start(){
+    while(numberOfFilms == null || numberOfFilms == '' || numberOfFilms.length > 50 || isNaN(numberOfFilms)){
         numberOfFilms = +prompt('скільки фільмів ви вже переглянули?', '');
     }
+}
 
     const personalMovieDB = {
         count: numberOfFilms,
@@ -13,6 +17,8 @@ let numberOfFilms = '';
         privat: false
     };
 
+   
+function rememberMyFilms(){
     for(let i = 0; i < 2; i++){
         let film = '',
             ocinka = '';
@@ -24,11 +30,37 @@ let numberOfFilms = '';
             }
         personalMovieDB.movies[film] = ocinka; 
     }
+}
 
- if(personalMovieDB.count < 10){
-     alert('переглянуто мало фільмів');
- } else if(personalMovieDB.count < 30){
-    alert('ви класичний глядач');
- } else{
-    alert('ви кіноман');
+rememberMyFilms();
+
+
+
+ function detectPersonalLevel(){
+    if(personalMovieDB.count < 10){
+        alert('переглянуто мало фільмів');
+    } else if(personalMovieDB.count < 30){
+       alert('ви класичний глядач');
+    } else{
+       alert('ви кіноман');
+    }
  }
+
+ detectPersonalLevel();
+
+
+ function showMyDB(privetOrNot){
+    if(!privetOrNot){
+        console.log(personalMovieDB);
+    }
+ }
+
+ showMyDB(personalMovieDB.privat);
+
+ function writeYourGenres(){
+     for(let i = 0; i < 3; i++){
+         personalMovieDB.genres[i] = prompt(`ваш улуюблений жанр під номером ${i + 1}`, '');
+     }
+ }
+
+ writeYourGenres();
