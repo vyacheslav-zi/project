@@ -44,8 +44,15 @@ function start(){
         },
         writeYourGenres: function(){
             for(let i = 0; i < 3; i++){
-                personalMovieDB.genres[i] = prompt(`ваш улуюблений жанр під номером ${i + 1}`, '');
+                let ganres = '';
+                while(ganres == '' || ganres == null){
+                    ganres = prompt(`ваш улуюблений жанр під номером ${i + 1}`, '');
+                }
+                personalMovieDB.genres[i] = ganres;
             }
+            personalMovieDB.genres.forEach((item, namber)=>{
+                console.log(`Улюблений жанр під номером ${namber + 1} - це ${item}`);
+            });
         },
         toggleVisibleMyDB: function(){
             (personalMovieDB.privat) ? personalMovieDB.privat = false : personalMovieDB.privat = true ;
@@ -55,8 +62,8 @@ function start(){
    
 
 
-personalMovieDB.rememberMyFilms();
-personalMovieDB.detectPersonalLevel();
-personalMovieDB.showMyDB(personalMovieDB.privat);
+//personalMovieDB.rememberMyFilms();
+//personalMovieDB.detectPersonalLevel();
+//personalMovieDB.showMyDB(personalMovieDB.privat);
 personalMovieDB.writeYourGenres();
-personalMovieDB.toggleVisibleMyDB();
+//personalMovieDB.toggleVisibleMyDB();
