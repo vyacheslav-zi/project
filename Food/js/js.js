@@ -36,7 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    const dataDeadLine = '2020-12-31';
+    //timer
+
+    const dataDeadLine = '2021-01-01';
 
     function countDown(endDate){
         const t = Date.parse(endDate) - Date.parse(new Date()),
@@ -107,3 +109,41 @@ document.addEventListener('DOMContentLoaded', () => {
 //     id = setTimeout(log, 500);
 // },500);
 
+const btn = document.querySelectorAll('[data-modal]'),
+      btnClose = document.querySelector('[data-close]'),
+      modalWindow = document.querySelector('.modal');
+
+
+function showWindow(){
+    modalWindow.classList.add('show');
+    modalWindow.classList.remove('hide');
+            // Либо вариант с toggle - но тогда назначить класс в верстке
+    document.body.style.overflow = 'hidden';
+}
+
+function hideWindow(){
+    modalWindow.classList.remove('show');
+    modalWindow.classList.add('hide');
+            // Либо вариант с toggle - но тогда назначить класс в верстке
+    document.body.style.overflow = '';
+}
+
+btn.forEach((item)=>{
+    item.addEventListener('click', showWindow);
+});
+
+btnClose.addEventListener('click', hideWindow);
+
+
+modalWindow.addEventListener('click', (event)=>{
+    if (event.target === modalWindow && modalWindow.classList.contains('show')){
+        hideWindow();
+    }
+});
+
+
+document.addEventListener('keydown', (event)=>{
+    if (event.code === 'Escape' && modalWindow.classList.contains('show')){
+        hideWindow();
+    }
+});
