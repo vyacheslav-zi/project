@@ -109,9 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
 //     id = setTimeout(log, 500);
 // },500);
 
+
+
+// dialog window 
+
+
 const btn = document.querySelectorAll('[data-modal]'),
       btnClose = document.querySelector('[data-close]'),
-      modalWindow = document.querySelector('.modal');
+      modalWindow = document.querySelector('.modal'),
+      autoModalShow = setTimeout(showWindow,3000);               
 
 
 function showWindow(){
@@ -119,6 +125,7 @@ function showWindow(){
     modalWindow.classList.remove('hide');
             // Либо вариант с toggle - но тогда назначить класс в верстке
     document.body.style.overflow = 'hidden';
+    clearInterval(autoModalShow);
 }
 
 function hideWindow(){
@@ -147,3 +154,15 @@ document.addEventListener('keydown', (event)=>{
         hideWindow();
     }
 });
+
+
+function showWindowByScroll(){
+    //console.log(window.pageYOffset);
+    if(window.pageYOffset + document.documentElement.clientHeight + 0.5 >= document.documentElement.scrollHeight){
+        showWindow();
+        window.removeEventListener('scroll', showWindowByScroll);
+    }
+}
+
+window.addEventListener('scroll', showWindowByScroll);
+
